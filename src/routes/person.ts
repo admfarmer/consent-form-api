@@ -66,8 +66,8 @@ const router = (fastify, { }, next) => {
     };
 
     try {
-      await personModel.save(db, data);
-      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK })
+      let rs: any = await personModel.save(db, data);
+      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
     } catch (error) {
       fastify.log.error(error);
       reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR) })
@@ -93,8 +93,8 @@ const router = (fastify, { }, next) => {
     };
 
     try {
-      await personModel.update(db, cid, info);
-      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK })
+      let rs: any = await personModel.update(db, cid, info);
+      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
     } catch (error) {
       fastify.log.error(error);
       reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR) })
@@ -105,8 +105,8 @@ const router = (fastify, { }, next) => {
     const id: any = req.query.id;
 
     try {
-      await personModel.remove(db, id);
-      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK })
+      let rs: any = await personModel.remove(db, id);
+      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
     } catch (error) {
       fastify.log.error(error);
       reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR) })
