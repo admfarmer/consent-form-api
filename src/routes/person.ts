@@ -66,8 +66,15 @@ const router = (fastify, { }, next) => {
     };
 
     try {
-      let rs: any = await personModel.save(db, data);
-      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
+      const rs_cid: any = await personModel.select_cid(db, cid);
+      const cid_x = rs_cid[0].cid;
+      console.log(cid_x);
+      if (!cid_x) {
+        let rs: any = await personModel.save(db, data);
+        reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
+      } else {
+        reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: "พบเลขบัตรประชาชนลงทะเบียนแล้ว" })
+      }
     } catch (error) {
       fastify.log.error(error);
       reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR) })
