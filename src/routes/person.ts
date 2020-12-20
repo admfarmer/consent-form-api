@@ -35,8 +35,8 @@ const router = (fastify, { }, next) => {
     }
   })
 
-  fastify.post('/select_hospcode', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
-    const hospcode = req.body.hospcode;
+  fastify.git('/select_hospcode', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
+    const hospcode = req.query.hospcode;
 
     try {
       const rs: any = await personModel.select_hospcode(db, hospcode);
