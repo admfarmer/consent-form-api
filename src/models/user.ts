@@ -9,7 +9,7 @@ export class UserModel {
 
   select(db: Knex, userCid: any) {
     return db(this.tableName)
-      .where('userCid', 'userCid');
+      .where('userCid', userCid);
   }
 
   login(db: Knex, userName: string, userPassword: string) {

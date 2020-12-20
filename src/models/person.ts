@@ -9,12 +9,12 @@ export class PersonModel {
 
   select_cid(db: Knex, cid: any) {
     return db(this.tableName)
-      .where('cid', 'cid');
+      .where('cid', cid);
   }
 
   select_hospcode(db: Knex, hospcode: any) {
     return db(this.tableName)
-      .where('hospcode', 'hospcode');
+      .where('hospcode', hospcode);
   }
 
   save(db: Knex, info: any) {

@@ -67,10 +67,10 @@ const router = (fastify, { }, next) => {
 
     try {
       const rs_cid: any = await personModel.select_cid(db, cid);
-      const cid_x = rs_cid[0].cid;
-      console.log(cid_x);
-      if (!cid_x) {
-        let rs: any = await personModel.save(db, data);
+
+      if (!rs_cid[0]) {
+
+        const rs: any = await personModel.save(db, data);
         reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
       } else {
         reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: "พบเลขบัตรประชาชนลงทะเบียนแล้ว" })
