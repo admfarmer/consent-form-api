@@ -35,7 +35,7 @@ const router = (fastify, { }, next) => {
     }
   })
 
-  fastify.git('/select_hospcode', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
+  fastify.get('/select_hospcode', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
     const hospcode = req.query.hospcode;
 
     try {
