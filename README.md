@@ -8,15 +8,15 @@ npm i ts-node -g
 ```
 
 ```
-git clone https://gitlab.com/siteslave/fastify-ts myApi
-cd myApi
+git clone https://github.com/admfarmer/consent-form-api.git consent-form-api
+cd consent-form-api
 npm i
 ```
 
 ## Running
 
 ```
-cp .env.example.txt .env
+cp configtxt config
 npm start
 ```
 
