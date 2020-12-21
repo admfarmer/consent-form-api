@@ -14,7 +14,7 @@ export class UserModel {
 
   login(db: Knex, userName: string, userPassword: string) {
     return db(this.tableName)
-      .select('userCid', 'userFullname', 'userHospcode')
+      .select('userCid', 'userFullname', 'userHospcode', 'userHospname')
       .where({
         userName: userName,
         userPassword: userPassword,
