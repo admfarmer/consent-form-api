@@ -36,6 +36,18 @@ const router = (fastify, { }, next) => {
     }
   })
 
+  fastify.post('/select_hospcode', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
+    const userHospcode = req.body.userHospcode;
+
+    try {
+      const rs: any = await userModel.select_hospcode(db, userHospcode);
+      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
+    } catch (error) {
+      fastify.log.error(error);
+      reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR) })
+    }
+  })
+
   fastify.post('/insert', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
     const userCid = req.body.userCid;
     const userName = req.body.userName;
@@ -45,6 +57,7 @@ const router = (fastify, { }, next) => {
 
     const userFullname = req.body.userFullname;
     const userHospcode = req.body.userHospcode;
+    const userHospname = req.body.userHospname;
     const userStatus = req.body.userStatus;
 
     const data: any = {
@@ -53,6 +66,7 @@ const router = (fastify, { }, next) => {
       userPassword: encPassword,
       userFullname: userFullname,
       userHospcode: userHospcode,
+      userHospname: userHospname,
       userStatus: userStatus
     };
 
@@ -73,6 +87,7 @@ const router = (fastify, { }, next) => {
     const userPassword = req.body.userPassword;
     const userFullname = req.body.userFullname;
     const userHospcode = req.body.userHospcode;
+    const userHospname = req.body.userHospname;
     const userStatus = req.body.userStatus;
 
     const info: any = {
@@ -80,6 +95,7 @@ const router = (fastify, { }, next) => {
       userName: userName,
       userFullname: userFullname,
       userHospcode: userHospcode,
+      userHospname: userHospname,
       userStatus: userStatus
     };
 

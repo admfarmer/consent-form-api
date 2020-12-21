@@ -11,6 +11,10 @@ export class UserModel {
     return db(this.tableName)
       .where('userCid', userCid);
   }
+  select_hospcode(db: Knex, userHospcode: any) {
+    return db(this.tableName)
+      .where('userHospcode', userHospcode);
+  }
 
   login(db: Knex, userName: string, userPassword: string) {
     return db(this.tableName)

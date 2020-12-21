@@ -50,27 +50,15 @@ const router = (fastify, { }, next) => {
 
   fastify.post('/insert', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
     const cid = req.body.cid;
-    const fullname = req.body.fullname;
-    const sex = req.body.sex;
-    const hospcode = req.body.hospcode;
-    const register = req.body.register;
-    const date_reg = req.body.date_reg;
+    const info: any = req.body;
 
-    const data: any = {
-      cid: cid,
-      fullname: fullname,
-      sex: sex,
-      hospcode: hospcode,
-      register: register,
-      date_reg: date_reg
-    };
 
     try {
       const rs_cid: any = await personModel.select_cid(db, cid);
 
       if (!rs_cid[0]) {
 
-        const rs: any = await personModel.save(db, data);
+        const rs: any = await personModel.save(db, info);
         reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
       } else {
         reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: "พบเลขบัตรประชาชนลงทะเบียนแล้ว" })
@@ -83,24 +71,12 @@ const router = (fastify, { }, next) => {
   //update?id=xx
   fastify.put('/update', { beforeHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
     const id = req.query.id;
-    const cid = req.body.cid;
-    const fullname = req.body.fullname;
-    const sex = req.body.sex;
-    const hospcode = req.body.hospcode;
-    const register = req.body.register;
-    const date_reg = req.body.date_reg;
 
-    const info: any = {
-      cid: cid,
-      fullname: fullname,
-      sex: sex,
-      hospcode: hospcode,
-      register: register,
-      date_reg: date_reg
-    };
+    const info: any = req.body;
+
 
     try {
-      let rs: any = await personModel.update(db, cid, info);
+      let rs: any = await personModel.update(db, id, info);
       reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
     } catch (error) {
       fastify.log.error(error);
