@@ -30,6 +30,7 @@ const router = (fastify, { }, next) => {
           userCid: info.userCid,
           userFullname: info.userFullname,
           userHospcode: info.userHospcode,
+          userHospname: info.userHospname,
         }, { expiresIn: '1d' });
         reply.status(HttpStatus.OK).send({
           statusCode: HttpStatus.OK, token: token,
