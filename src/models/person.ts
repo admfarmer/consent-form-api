@@ -4,7 +4,8 @@ export class PersonModel {
   tableName: string = 'person';
 
   list(db: Knex) {
-    return db(this.tableName)
+    return db('person').select('person.*', 'documents.file_path', 'documents.document_id')
+      .leftJoin('documents', 'documents.document_code', 'person.cid')
   }
 
   select_cid(db: Knex, cid: any) {
