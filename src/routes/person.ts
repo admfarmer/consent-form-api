@@ -61,7 +61,7 @@ const router = (fastify, { }, next) => {
         const rs: any = await personModel.save(db, info);
         reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
       } else {
-        reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: "พบเลขบัตรประชาชนลงทะเบียนแล้ว" })
+        reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: "พบเลขบัตรประชาชนลงทะเบียนแล้ว", info: rs_cid })
       }
     } catch (error) {
       fastify.log.error(error);
